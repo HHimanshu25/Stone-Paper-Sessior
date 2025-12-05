@@ -26,7 +26,7 @@ main1.querySelector('.item3').addEventListener('click', () => {
 })
 let random
 function game() {
-    random = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+    random = Math.floor(Math.random() * (3)) + 1;
 
     if (random == 1) {
         main2.children[0].classList.toggle('item1')
@@ -51,11 +51,8 @@ function reload() {
     }
 }
 async function winning(win) {
-    let winner = Number(win)
-    
-    if(winner == random){
-        game()
-    }
+    let winner = Number(win)    
+   
     let result = document.querySelector('.result')
 
     await new Promise(resolve => setTimeout(resolve, 500))
