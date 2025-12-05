@@ -5,6 +5,7 @@
 }
 
 .body {
+
     background-color: aliceblue;
 
 }
@@ -14,20 +15,22 @@
     align-items: center;
     justify-content: center;
     gap: 50px;
-    width: 100%;
+    width: 400px;
     padding-top: 10rem;
+    position: relative;
 
 }
-.select{
-width: 130px ;
-height: 130px;
-/* border:  4px solid black; */
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-gap: 10px;
-z-index: 2;
+
+.select {
+    width: 130px;
+    height: 130px;
+    /* border:  4px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    z-index: 2;
 }
 
 .item {
@@ -42,32 +45,76 @@ z-index: 2;
     display: block;
     background-size: cover;
     background-position: center;
-    
+
 }
-.equal{
+
+.equal {
     color: gray;
     font-size: 10rem;
     font-weight: bolder;
 }
 
-.select1 .item{
-    background-color: blueviolet;
+.select {
+    border: 5px solid black;
+    width: 120px;
+    height: 120px;
 }
-.bg1{
+
+.heading {
+    font-size: 2.5rem;
+    font-weight: 500;
+    position: absolute;
+    top: 20px;
+    left: 0;
+}
+
+.result {
+    font-size: 2rem;
+    position: absolute;
+    bottom: 300px;
+    left: 10%;
+
+}
+
+.bg1 {
     background-image: url('./stone.jpeg');
 }
-.bg2{
+
+.bg2 {
     background-image: url('./paper.jpeg');
 }
-.bg3{
+
+.bg3 {
     background-image: url('./sisseor.jpeg');
 }
-.item1{
-    display: none;   
-}
-.item2{
+
+.item1 {
     display: none;
 }
-.item3{
+
+.item2 {
     display: none;
+}
+
+.item3 {
+    display: none;
+}
+
+.select {
+    position: relative;
+}
+
+.select2::before {
+    content: 'Computer';
+    font-size: 2rem;
+    position: absolute;
+    top: -45px;
+
+}
+
+.select1::before {
+    content: 'Player';
+    font-size: 2rem;
+    top: -150px;
+    position: absolute;
 }
