@@ -71,8 +71,9 @@
 .result {
     font-size: 2rem;
     position: absolute;
-    bottom: 300px;
-    left: 10%;
+    color: black;
+     bottom: 300px;
+    /* left: 10%; */ 
 
 }
 

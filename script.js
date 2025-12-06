@@ -51,64 +51,68 @@ function reload() {
 
     }
 }
+let result = document.querySelector('.result')
 async function winning(win) {    
     let winner = Number(win)    
     let rand = random()
         
     if(winner == rand){
-        if(rand == 3)
-            game(rand-1)
-        else
-            game(rand+1)
+        if(rand == 3){
+            rand = rand-1;
+            game(rand)
+        }
+        else{
+            rand = rand+1;
+            game(rand)
+        }
     } 
     else
         game(rand)           
     
-    let result = document.querySelector('.result')
 
     await new Promise(resolve => setTimeout(resolve, 500))
-    if (random == 1 && winner == 3) {
+    if (rand == 1 && winner == 3) {
         result.innerText = "Computer is winner"
 
     }
-    else if (random == 2 && winner == 1) {
+    else if (rand == 2 && winner == 1) {
         result.innerText = "Computer is winner"
     }
 
-    else if (random == 3 && winner == 2) {
+    else if (rand == 3 && winner == 2) {
         result.innerText = "Computer is winner"
     }
 
-    else if (random == 3 && winner == 1) {
+    else if (rand == 3 && winner == 1) {
         result.innerText = "Computer is winner"
     }
 
-    else if (random == 1 && winner == 2) {
+    else if (rand == 1 && winner == 2) {
 
         result.innerText = "Player is winner"
     }
 
-    else if (random == 2 && winner == 3) {
+    else if (rand == 2 && winner == 3) {
 
         result.innerText = "Player is winner"
     }
 
-    else if (random == 3 && winner == 2) {
+    else if (rand == 3 && winner == 2) {
 
         result.innerText = "Player is winner"
     }
 
-    else if (random == 2 && winner == 2) {
+    else if (rand == 2 && winner == 2) {
 
         result.innerText = "Match is tie"
     }
 
-    else if (random == 3 && winner == 3) {
+    else if (rand == 3 && winner == 3) {
 
         result.innerText = "Match is tie"
     }
 
-    else if (random == 1 && winner == 1) {
+    else if (rand == 1 && winner == 1) {
 
         result.innerText = "Match is tie"
     }
