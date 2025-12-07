@@ -1,124 +1,109 @@
-let main1 = document.querySelector('.select1')
-let main2 = document.querySelector('.select2')
-
-window.addEventListener('load', () => {
-    for (let i = 1; i <= 3; i++) {
-        main1.children[`${i - 1}`].classList.toggle(`item${i}`)
+// Button click detece
+// Random computer choice
+// Compare logic
+// Update score
+// Update round
+// End game after round finish
+let rand;
+let playe;
+let round = 1;
+let gameend = false;
+let chil = document.querySelector('.choices')
+chil.children[0].addEventListener('click', () => {
+    if (gameend) return;
+    document.querySelector(".player-pick").innerHTML = '✊'
+    playe = 1;
+})
+chil.children[1].addEventListener('click', () => {
+    if (gameend) return;
+    document.querySelector(".player-pick").innerHTML = '✋'
+    playe = 2
+})
+chil.children[2].addEventListener('click', () => {
+    if (gameend) return;
+    document.querySelector(".player-pick").innerHTML = '✌️'
+    playe = 3
+})
+document.querySelector('.choices').addEventListener('click', () => {
+    if (gameend) return
+    else {
+        rand = Math.floor(Math.random() * 3) + 1
+        let comp = document.querySelector('.computer-pick');
+        if (rand == 1)
+            comp.innerHTML = '✊'
+        else if (rand == 2)
+            comp.innerHTML = '✋'
+        else
+            comp.innerHTML = '✌️'
+        winner()
     }
-
 })
 
-main1.querySelector('.item1').addEventListener('click', () => {
-    main1.children[1].classList.toggle(`item2`)
-    main1.children[2].classList.toggle(`item3`)
+let playerScore = 0;
+let computerScore = 0;
 
-})
-main1.querySelector('.item2').addEventListener('click', () => {
-    main1.children[2].classList.toggle(`item3`)
-    main1.children[0].classList.toggle(`item1`)
+function winner() {
+    let result = document.querySelector(".result-text")
+    let player = "🔥 You Win!";
+    let computer = "💀 Computer Wins!";
+    let tie = "🤝 Tie!";
+    // let tt = round;
 
-})
-main1.querySelector('.item3').addEventListener('click', () => {
-    main1.children[0].classList.toggle(`item1`)
-    main1.children[1].classList.toggle(`item2`)
-
-
-})
-
-let random = () =>{
-     return Math.floor(Math.random() * (3)) + 1;
-}
-function game(value) {
-    if (value == 1) {
-        main2.children[0].classList.toggle('item1')
+    if ((playe === 1 && rand === 3) ||
+        (playe === 2 && rand === 1) ||
+        (playe === 3 && rand === 2)) {
+        result.innerHTML = player
+        ++playerScore;
     }
-    else if (value == 2) {
-        main2.children[1].classList.toggle('item2')
-    }
-    else if (value == 3) {
-        main2.children[2].classList.toggle('item3')
-    }
-}
-function reload() {
-    for (let i = 1; i <= 3; i++) {
-        if (main1.children[`${i - 1}`].classList.toggle(`item${i}`))
-            main1.children[`${i - 1}`].classList.toggle(`item${i}`)
 
-        if (!main2.children[`${i - 1}`].classList.toggle(`item${i}`))
-            main2.children[`${i - 1}`].classList.toggle(`item${i}`)
 
-        document.querySelector('.result').innerText = " "
-
+    else if ((rand == 1 && playe == 3) ||
+        (rand == 2 && playe == 1) ||
+        (rand == 3 && playe == 2)) {
+        result.innerHTML = computer
+        ++computerScore
     }
-}
-let result = document.querySelector('.result')
-async function winning(win) {    
-    let winner = Number(win)    
-    let rand = random()
-        
-    if(winner == rand){
-        if(rand == 3){
-            rand = rand-1;
-            game(rand)
-        }
-        else{
-            rand = rand+1;
-            game(rand)
-        }
-    } 
+
+
+    else if ((rand == 1 && playe == 1) ||
+        (rand == 2 && playe == 2) ||
+        (rand == 3 && playe == 3)) {
+        result.innerHTML = tie
+    }
+
     else
-        game(rand)           
-    
+        result.innerHTML = 'chutiye'
 
-    await new Promise(resolve => setTimeout(resolve, 500))
-    if (rand == 1 && winner == 3) {
-        result.innerText = "Computer is winner"
+    document.querySelector('.player-score').innerHTML = playerScore
+    document.querySelector('.computer-score').innerHTML = computerScore
+
+    if (round == 5) {
+
+        gameend = true;
+
+        if (playerScore > computerScore) {
+            result.innerHTML = `🏆 You Win the Match (${playerScore}-${computerScore})`;
+        }
+        else if (computerScore > playerScore) {
+            result.innerHTML = `💀 You Lose! (${computerScore}-${playerScore})`;
+        }
+        else {
+            result.innerHTML = "🤝 Match Draw!";
+        }
 
     }
-    else if (rand == 2 && winner == 1) {
-        result.innerText = "Computer is winner"
-    }
+    ++round
+    if (round < 6)
+        document.querySelector('.round-display').innerHTML = `Round ${round} / 5`
 
-    else if (rand == 3 && winner == 2) {
-        result.innerText = "Computer is winner"
-    }
 
-    else if (rand == 3 && winner == 1) {
-        result.innerText = "Computer is winner"
-    }
-
-    else if (rand == 1 && winner == 2) {
-
-        result.innerText = "Player is winner"
-    }
-
-    else if (rand == 2 && winner == 3) {
-
-        result.innerText = "Player is winner"
-    }
-
-    else if (rand == 3 && winner == 2) {
-
-        result.innerText = "Player is winner"
-    }
-
-    else if (rand == 2 && winner == 2) {
-
-        result.innerText = "Match is tie"
-    }
-
-    else if (rand == 3 && winner == 3) {
-
-        result.innerText = "Match is tie"
-    }
-
-    else if (rand == 1 && winner == 1) {
-
-        result.innerText = "Match is tie"
-    }
-    await new Promise(res => setTimeout(res, 1000))
-    reload()
 }
 
-
-
+document.querySelector('.reset-btn').addEventListener('click', () => {
+    playerScore = document.querySelector('.player-score').innerHTML = 0;
+    computerScore = document.querySelector('.computer-score').innerHTML = 0;
+    document.querySelector('.round-display').innerHTML = 'Round 1 / 5';
+    round = 1;
+    document.querySelector('.result-text').innerHTML = 'Make your move!'
+    gameend = false;
+})
